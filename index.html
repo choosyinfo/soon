@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>choosy.info - Coming Soon</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0 20px;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 2rem;
+            animation: fadeIn 4s ease-in-out;
+        }
+        .countdown div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .countdown span {
+            font-size: 1rem;
+            color: #dddddd;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .subscribe {
+            margin-top: 20px;
+            animation: fadeIn 5s ease-in-out;
+        }
+        .subscribe input {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+        }
+        .subscribe button {
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #e74c3c;
+            color: #ffffff;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div class="container">
+        <h1>choosy.info is Coming Soon</h1>
+        <p>We are building something amazing. Stay tuned for updates!</p>
+        <div class="countdown" id="countdown">
+            <div>
+                <div id="days">00</div>
+                <span>Days</span>
+            </div>
+            <div>
+                <div id="hours">00</div>
+                <span>Hours</span>
+            </div>
+            <div>
+                <div id="minutes">00</div>
+                <span>Minutes</span>
+            </div>
+            <div>
+                <div id="seconds">00</div>
+                <span>Seconds</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Starfield Generator
+        const starsContainer = document.getElementById('stars');
+        const createStar = () => {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDuration = Math.random() * 5 + 2 + 's';
+            starsContainer.appendChild(star);
+        };
+        for (let i = 0; i < 100; i++) createStar();
+
+        // Countdown Timer
+        const countdown = () => {
+            const endDate = new Date('2024-12-31T23:59:59').getTime();
+            const now = new Date().getTime();
+            const gap = endDate - now;
+
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const days = Math.floor(gap / day);
+            const hours = Math.floor((gap % day) / hour);
+            const minutes = Math.floor((gap % hour) / minute);
+            const seconds = Math.floor((gap % minute) / second);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        };
+
+        setInterval(countdown, 1000);
+    </script>
+</body>
+</html>
